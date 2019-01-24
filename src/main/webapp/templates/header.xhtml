@@ -9,26 +9,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html">
 <ui:composition>
     <h:form>
-        <ul>
+        <div class="w3-bar w3-black">
             <ui:fragment rendered="#{request.isUserInRole('USER')}">
-                <li><h:link value="User space" outcome="/app/index.xhtml"/></li>
+                <h:link value="User space" outcome="/app/index.xhtml" styleClass="w3-bar-item w3-button"/>
             </ui:fragment>
             <ui:fragment rendered="#{request.isUserInRole('MANAGER')}">
-                <li><h:link value="Manager space" outcome="/manage/index.xhtml"/></li>
-                <li><h:link value="Create Book" outcome="/manage/new-book.xhtml"/></li>
+                <h:link value="Manager space" outcome="/manage/index.xhtml" styleClass="w3-bar-item w3-button"/>
+                <h:link value="Create Book" outcome="/manage/new-book.xhtml" styleClass="w3-bar-item w3-button"/>
             </ui:fragment>
             <ui:fragment rendered="#{request.isUserInRole('ADMIN')}">
-                <li><h:link value="Admin space" outcome="/admin/index.xhtml"/></li>
-                <li><h:link value="Registered Users" outcome="/admin/user-list.xhtml"/></li>
+                <h:link value="Admin space" outcome="/admin/index.xhtml" styleClass="w3-bar-item w3-button"/>
+                <h:link value="Registered Users" outcome="/admin/user-list.xhtml" styleClass="w3-bar-item w3-button"/>
             </ui:fragment>
             <ui:fragment rendered="#{empty currentUser.user}">
-                <li><h:link value="Login" outcome="/app/index.xhtml"/></li>
-                <li><h:link value="Register" outcome="/registration.xhtml"/></li>
+                <h:link value="Login" outcome="/app/index.xhtml" styleClass="w3-bar-item w3-button"/>
+                <h:link value="Register" outcome="/registration.xhtml" styleClass="w3-bar-item w3-button"/>
             </ui:fragment>
             <ui:fragment rendered="#{not empty currentUser.user}">
-                <li><h:commandLink value="Logout" action="#{loginBean.logout}"/></li>
+                <h:commandLink value="Logout" action="#{loginBean.logout}" styleClass="w3-bar-item w3-button"/>
             </ui:fragment>
-        </ul>
+        </div>
     </h:form>
 </ui:composition>
 </html>

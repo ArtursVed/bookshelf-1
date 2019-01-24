@@ -7,7 +7,7 @@
 
 <ui:composition template="/templates/main.xhtml">
     <ui:define name="content">
-
+<h:form>
         <f:metadata>
             <f:viewAction action="#{manageBooksBean.prepare}"/>
         </f:metadata>
@@ -28,7 +28,47 @@
                 <f:facet name="header">User Name</f:facet>
                 #{res.user.loginName}
             </h:column>
+            <h:column>
+                <f:facet name="header">User Name</f:facet>
+                <h:commandButton action="#{manageBooksBean.giveBook(res)}"
+                                 value="Give out"
+                                 styleClass="w3-button w3-orange">
+                <f:ajax render="@form" execute="@form"/>
+                </h:commandButton>
+            </h:column>
         </h:dataTable>
+    <f:metadata>
+        <f:viewAction action="#{manageBooksBean.prepare}"/>
+    </f:metadata>
+
+    <h2>Taken BOOKS</h2>
+
+    <h:dataTable value="#{manageBooksBean.takenBooks}"
+                 var="res"
+                 styleClass="w3-table w3-table-all">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{res.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Book Title</f:facet>
+            #{res.book.title}
+        </h:column>
+        <h:column>
+            <f:facet name="header">User Name</f:facet>
+            #{res.user.loginName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">User Name</f:facet>
+            <h:commandButton action="#{manageBooksBean.takeBackBook(res)}"
+                             value="Taken book"
+                             styleClass="w3-button w3-orange">
+                <f:ajax render="@form" execute="@form"/>
+            </h:commandButton>
+        </h:column>
+    </h:dataTable>
+
+</h:form>
 
     </ui:define>
 </ui:composition>
