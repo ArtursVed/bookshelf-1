@@ -1,6 +1,7 @@
 package lv.tsi.javacourses.bookshelf.books.boundary;
 
 import lv.tsi.javacourses.bookshelf.auth.boundary.CurrentUser;
+import lv.tsi.javacourses.bookshelf.books.model.BookEntity;
 import lv.tsi.javacourses.bookshelf.books.model.ReservationEntity;
 
 import javax.faces.view.ViewScoped;
@@ -23,6 +24,7 @@ public class MyBooksBean implements Serializable {
     private List<ReservationEntity> availableResult;
     private List<ReservationEntity> inQueueResult;
     private List<ReservationEntity> takenResult;
+    private List<BookEntity> hystoryResult;
 
 
     public void prepare() {
@@ -54,6 +56,11 @@ public class MyBooksBean implements Serializable {
                 "where r.user = :user and r.status = 'TAKEN'", ReservationEntity.class)
                 .setParameter("user", currentUser.getUser())
                 .getResultList();
+
+        hystoryResult = em.createQuery("select distinct r.book from Reservation r " +
+                "where r.user = :user and r.status = 'CLOSED'" ,BookEntity.class)
+                .setParameter("user", currentUser.getUser())
+                .getResultList();
     }
 
     public List<ReservationEntity> getAvailableBooks() {
@@ -69,4 +76,7 @@ public class MyBooksBean implements Serializable {
     }
 
 
+    public List<BookEntity> getHystoryBooks() {
+        return hystoryResult;
+    }
 }
