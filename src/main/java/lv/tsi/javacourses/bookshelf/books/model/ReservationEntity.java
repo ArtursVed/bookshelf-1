@@ -66,4 +66,15 @@ public class ReservationEntity implements Serializable {
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
+
+    @Override
+    public String toString() {
+        return "ReservationEntity{" +
+                "id=" + id +
+                ", book=" + book +
+                ", user=" + user +
+                ", status=" + status +
+                ", created=" + created +
+                '}';
+    }
 }
